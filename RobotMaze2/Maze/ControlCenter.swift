@@ -36,51 +36,19 @@ class ControlCenter {
         let isTwoWayPath = (myWallInfo.numberOfWalls == 2)
         let isDeadEnd = (myWallInfo.numberOfWalls == 3)
         
-        
-        // Step 2.2b
-        // Test whether the values of the above constants are correct
-        
-        // Step 2.3a
-        // Three-way Path - else-if statements
-        
-        // TODO: If the robot encounters a three way junction and there IS a wall ahead, it should randomly rotate right or left. Uncomment the code below.
         if isThreeWayJunction && robotIsBlocked {
             randomlyRotateRightOrLeft(myRobot)
-        }
-        
-        // TODO: If the robot encounters a three way junction and there is NO wall ahead, it should continue straight or rotate (you need to write this else-if statement)
-        if isThreeWayJunction && !robotIsBlocked {
+        } else if isThreeWayJunction && !robotIsBlocked {
             continueStraightOrRotate(myRobot, wallInfo: myWallInfo)
-        }
-        
-        // Step 2.3b
-        // Two-way Path - else-if statements
-        
-        // TODO: If the robot encounters a two way path and there is NO wall ahead it should continue forward.
-        if isTwoWayPath && !robotIsBlocked {
+        } else if isTwoWayPath && !robotIsBlocked{
             myRobot.move()
+        } else if isTwoWayPath && robotIsBlocked{
+            turnTowardClearPath(myRobot, wallInfo: myWallInfo)
+        } else if isDeadEnd && !robotIsBlocked {
+            myRobot.move()
+        } else if isDeadEnd && robotIsBlocked{
+            myRobot.rotateRight()
         }
-        
-        // TODO: If the robot encounters a two way path and there IS a wall ahead, it should randomly rotate.
-        if isTwoWayPath && robotIsBlocked {
-            randomlyRotateRightOrLeft(myRobot)
-        }
-        
-        // Step 2.3c
-        // Dead end - else-if statements
-        
-        // TODO: If the robot encounters a dead end and there is NO wall ahead it should move forward.
-        
-        // TODO: If the robot encounters a dead end and there IS a wall ahead it should rotateRight().
-        if isDeadEnd {
-            if robotIsBlocked {
-                myRobot.rotateRight()
-            } else {
-                myRobot.move()
-            }
-        }
-        
-        
         
         
         // Step 3.2

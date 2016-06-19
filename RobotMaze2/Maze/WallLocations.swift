@@ -14,23 +14,16 @@ extension ControlCenter {
         
         let cell = mazeController.currentCell(robot)
         var isWall: Bool = false
+        
         switch(direction) {
         case .Up:
-            if cell.top {
-                isWall = true
-            }
+            isWall = cell.top
         case .Down:
-            if cell.bottom{
-                isWall = true
-            }
+            isWall = cell.bottom
         case .Left:
-            if cell.left{
-                isWall = true
-            }
+            isWall = cell.left
         case .Right:
-            if cell .right{
-                isWall = true
-            }
+            isWall = cell.right
         }
         
         return isWall
@@ -44,26 +37,26 @@ extension ControlCenter {
         // Check is there is a wall at the top of the current cell
         let isWallUp = cell.top
         if isWallUp {
-            numberOfWalls++
+            numberOfWalls += 1
         }
         
         // Check if there is a wall to the right of the current cell
         let isWallRight = cell.right
         if isWallRight {
-            numberOfWalls++
+            numberOfWalls += 1
         }
         
         // Step 2.1a
         // TODO: Check if there is a wall at the bottom of the current cell
         let isWallLeft = cell.left
         if isWallLeft {
-            numberOfWalls++
+            numberOfWalls += 1
         }
         
         // TODO: Check if there is a wall to the left of the current cell
         let isWallBottom = cell.bottom
         if isWallBottom {
-            numberOfWalls++
+            numberOfWalls += 1
         }
         
         // Step 2.1b
@@ -71,6 +64,6 @@ extension ControlCenter {
         
         // TODO: Return a tuple representing the bools for top, right, down & left, and the number of walls
         // This tuple is a placeholder
-        return (isWallUp, isWallRight, isWallLeft, isWallBottom, numberOfWalls)
+        return (isWallUp, isWallRight, isWallBottom, isWallLeft, numberOfWalls)
     }
 }

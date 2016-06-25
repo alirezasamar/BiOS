@@ -10,7 +10,35 @@ import Foundation
 extension Hero {
     
     func planetData(dataFile: String) -> String {
-        return ""
+        var planetWithHighestPoints = ""
+        var highestPoints = 0
+        let dataFileURL = NSBundle.mainBundle().URLForResource(dataFile, withExtension: "json")!
+        let planetsRaw = NSData(contentsOfURL: dataFileURL)!
+        var planets: [[String:AnyObject]]!
+        do {
+            planets = try! NSJSONSerialization.JSONObjectWithData(planetsRaw, options: NSJSONReadingOptions()) as! [[String:AnyObject]]
+        }
+        
+        for planet in planets {
+            if let planetName = planet["Name"] as? String {
+                if let commonCnt = planet["CommonItemsDetected"] as? Int {
+                    if let uncommonCnt = planet["UncommonItemsDetected"] as? Int {
+                        if let rareCnt = planet["RareItemsDetected"] as? Int {
+                            if let legendaryCnt = planet["LegendaryItemsDetected"] as? Int {
+                                let currPlanetPoints = commonCnt + uncommonCnt * 2 + rareCnt * 3 + legendaryCnt * 4
+                                if currPlanetPoints > highestPoints {
+                                    highestPoints = currPlanetPoints
+                                    planetWithHighestPoints = planetName
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        
+        return planetWithHighestPoints
     }
 }
 

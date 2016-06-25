@@ -42,7 +42,17 @@ struct Ship {
     var hitTracker: HitTracker
 // TODO: Add a getter for sunk. Calculate the value returned using hitTracker.cellsHit.
     var sunk: Bool {
-        return false
+        
+        get {
+            for hit in hitTracker.cellsHit {
+                if hit.1 == false {
+                    return false
+                }
+            }
+            return true
+        }
+        
+        
     }
 
 // TODO: Add custom initializers

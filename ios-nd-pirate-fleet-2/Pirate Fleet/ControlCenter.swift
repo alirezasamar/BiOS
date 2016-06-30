@@ -59,14 +59,6 @@ struct Ship {
         self.hitTracker = HitTracker()
     }
     
-    init(length: Int, location: GridLocation, isVertical: Bool, hitTracker: HitTracker) {
-        self.length = length
-        self.location = location
-        self.isVertical = isVertical
-        self.hitTracker = HitTracker()
-        self.isWooden = false
-    }
-    
     init(length: Int, location: GridLocation, isVertical: Bool, isWooden: Bool) {
         self.length = length
         self.location = location
@@ -124,6 +116,60 @@ struct SeaMonster: PenaltyCell {
     
 }
 
+//class ControlCenter {
+//    
+//    func placeItemsOnGrid(human: Human) {
+//        
+//        let smallShip = Ship(length: 2, location: GridLocation(x: 3, y: 4), isVertical: true, isWooden: false)
+//        human.addShipToGrid(smallShip)
+//        
+//        let mediumShip1 = Ship(length: 3, location: GridLocation(x: 0, y: 0), isVertical: false, isWooden: false)
+//        human.addShipToGrid(mediumShip1)
+//        
+//        let mediumShip2 = Ship(length: 3, location: GridLocation(x: 3, y: 1), isVertical: false, isWooden: false)
+//        human.addShipToGrid(mediumShip2)
+//        
+//        let largeShip = Ship(length: 4, location: GridLocation(x: 6, y: 3), isVertical: true, isWooden: false)
+//        human.addShipToGrid(largeShip)
+//        
+//        let xLargeShip = Ship(length: 5, location: GridLocation(x: 7, y: 2), isVertical: true, isWooden: false)
+//        human.addShipToGrid(xLargeShip)
+//        
+//        /*
+//         let mine1 = Mine(location: GridLocation(x: 6, y: 0))
+//         human.addMineToGrid(mine1)
+//         
+//         let mine2 = Mine(location: GridLocation(x: 3, y: 3))
+//         human.addMineToGrid(mine2)
+//         */
+//        
+//        let newMine1 = Mine(location: GridLocation(x: 6, y: 0), penaltyText: "Boom! Boom! Boom!", guaranteesHit: true)
+//        human.addMineToGrid(newMine1)
+//        
+//        let newMine2 = Mine(location: GridLocation(x: 3, y: 3), penaltyText: "Boom! Bam! Boom!", guaranteesHit: true)
+//        human.addMineToGrid(newMine2)
+//        
+//        let seamonster1 = SeaMonster(location: GridLocation(x: 5, y: 6))
+//        human.addSeamonsterToGrid(seamonster1)
+//        
+//        let seamonster2 = SeaMonster(location: GridLocation(x: 2, y: 2))
+//        human.addSeamonsterToGrid(seamonster2)
+//    }
+//    
+//    func calculateFinalScore(gameStats: GameStats) -> Int {
+//        
+//        var finalScore: Int
+//        
+//        let sinkBonus = (5 - gameStats.enemyShipsRemaining) * gameStats.sinkBonus
+//        let shipBonus = (5 - gameStats.humanShipsSunk) * gameStats.shipBonus
+//        let guessPenalty = (gameStats.numberOfHitsOnEnemy + gameStats.numberOfMissesByHuman) * gameStats.guessPenalty
+//        
+//        finalScore = sinkBonus + shipBonus - guessPenalty
+//        
+//        return finalScore
+//    }
+//}
+
 class ControlCenter {
     
     func placeItemsOnGrid(human: Human) {
@@ -131,37 +177,30 @@ class ControlCenter {
         let smallShip = Ship(length: 2, location: GridLocation(x: 3, y: 4), isVertical: true, isWooden: false)
         human.addShipToGrid(smallShip)
         
-        let mediumShip1 = Ship(length: 3, location: GridLocation(x: 0, y: 0), isVertical: false, isWooden: false)
+        let mediumShip1 = Ship(length: 3, location: GridLocation(x: 0, y: 0), isVertical: false, isWooden: true)
         human.addShipToGrid(mediumShip1)
         
-        let mediumShip2 = Ship(length: 3, location: GridLocation(x: 3, y: 1), isVertical: false, isWooden: false)
+        let mediumShip2 = Ship(length: 3, location: GridLocation(x: 3, y: 1), isVertical: false, isWooden: true)
         human.addShipToGrid(mediumShip2)
         
-        let largeShip = Ship(length: 4, location: GridLocation(x: 6, y: 3), isVertical: true, isWooden: false)
+        let largeShip = Ship(length: 4, location: GridLocation(x: 6, y: 3), isVertical: true, isWooden: true)
         human.addShipToGrid(largeShip)
         
         let xLargeShip = Ship(length: 5, location: GridLocation(x: 7, y: 2), isVertical: true, isWooden: false)
         human.addShipToGrid(xLargeShip)
         
-        /*
-         let mine1 = Mine(location: GridLocation(x: 6, y: 0))
-         human.addMineToGrid(mine1)
-         
-         let mine2 = Mine(location: GridLocation(x: 3, y: 3))
-         human.addMineToGrid(mine2)
-         */
+        let mine1 = Mine(location: GridLocation(x: 6, y: 0), penaltyText: "KA-BOOM!")
+        human.addMineToGrid(mine1)
         
-        let newMine1 = Mine(location: GridLocation(x: 6, y: 0), penaltyText: "Boom! Boom! Boom!", guaranteesHit: true)
-        human.addMineToGrid(newMine1)
-        
-        let newMine2 = Mine(location: GridLocation(x: 3, y: 3), penaltyText: "Boom! Bam! Boom!", guaranteesHit: true)
-        human.addMineToGrid(newMine2)
+        let mine2 = Mine(location: GridLocation(x: 3, y: 3), penaltyText: "KA-BOOM!", guaranteesHit: true)
+        human.addMineToGrid(mine2)
         
         let seamonster1 = SeaMonster(location: GridLocation(x: 5, y: 6))
         human.addSeamonsterToGrid(seamonster1)
         
         let seamonster2 = SeaMonster(location: GridLocation(x: 2, y: 2))
         human.addSeamonsterToGrid(seamonster2)
+        
     }
     
     func calculateFinalScore(gameStats: GameStats) -> Int {
